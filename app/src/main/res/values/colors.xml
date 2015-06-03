@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cancel">#d9534f</color>
+    <color name="cancel_border">#d43f3a</color>
+    <color name="primary">#8BC34A</color>
+    <color name="primary_dark">#689F38</color>
+    <color name="pop_background">#5cb85c</color>
+    <color name="accent">#4CAF50</color>
+    <color name="primary_light">#DCEDC8</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="psts_background_tab_pressed">#1AFFFFFF</color>
+    <color name="image_tag_yellow">#FFB90F</color>
+    <color name="text_color">#777777</color>
+</resources>
