@@ -1,5 +1,7 @@
 package com.dreamer.practice.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * 海报
  */
@@ -11,6 +13,7 @@ public class Poster {
 	/**
 	 * 中图
 	 */
+	@SerializedName("medium")
 	private String middle;
 	/**
 	 * 大图

@@ -2,7 +2,6 @@ package com.dreamer.practice.task;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.dreamer.practice.Application;
 import com.dreamer.practice.bean.USBoxMovieList;
@@ -22,6 +21,7 @@ public class USBoxMovieListTask extends AsyncTask<Void, Void, USBoxMovieList> {
     private Application application;
     private GetDateFinishedListener getDateFinishedListener;
     private USBoxMovieList usBoxMovieList;
+    private boolean isSuccess = true;
 
     public USBoxMovieListTask(Context context) {
         this.context = context;
@@ -44,6 +44,8 @@ public class USBoxMovieListTask extends AsyncTask<Void, Void, USBoxMovieList> {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            isSuccess = false;
+            return null;
         }
         return usBoxMovieList;
     }
@@ -53,10 +55,12 @@ public class USBoxMovieListTask extends AsyncTask<Void, Void, USBoxMovieList> {
         super.onPostExecute(usBoxMovieList);
         if(usBoxMovieList !=null){
             if (getDateFinishedListener!=null){
-                getDateFinishedListener.onGetDateFinished(usBoxMovieList.getSubjects());
+                getDateFinishedListener.onGetDateFinished(isSuccess,usBoxMovieList.getSubjects());
             }
         }else{
-            Toast.makeText(context,"网络异常",Toast.LENGTH_SHORT).show();
+            if (getDateFinishedListener!=null){
+                getDateFinishedListener.onGetDateFinished(isSuccess,null);
+            }
         }
     }
 
@@ -65,6 +69,6 @@ public class USBoxMovieListTask extends AsyncTask<Void, Void, USBoxMovieList> {
     }
 
     public static interface GetDateFinishedListener {
-        void onGetDateFinished(Object data);
+        void onGetDateFinished(boolean success, Object data);
     }
 }

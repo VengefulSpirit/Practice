@@ -56,7 +56,7 @@ public class TopMovieListAdapter extends RecyclerView.Adapter<TopMovieListAdapte
     public void onBindViewHolder(MovieHolder holder, final int position) {
         final Movie movie = movieList.get(position);
         //Picasso.with(context).setIndicatorsEnabled(true);
-        Picasso.with(context).load(movie.getImages().getSmall()).into(holder.poster);
+        Picasso.with(context).load(movie.getImages().getMiddle()).placeholder(R.drawable.load).error(R.drawable.load_error).into(holder.poster);
         holder.title.setText(movie.getTitle());
         holder.original_title.setText(movie.getOriginalTitle());
 

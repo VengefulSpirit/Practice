@@ -54,7 +54,7 @@ public class USBoxMovieListAdapter extends RecyclerView.Adapter<USBoxMovieListAd
     @Override
     public void onBindViewHolder(MovieHolder holder, int position) {
         final USBoxMovie USBoxMovie = USBoxMovieList.get(position);
-        Picasso.with(context).load(USBoxMovie.getSimpleMovie().getImages().getSmall()).into(holder.poster);
+        Picasso.with(context).load(USBoxMovie.getSimpleMovie().getImages().getMiddle()).placeholder(R.drawable.load).error(R.drawable.load_error).into(holder.poster);
         holder.title.setText(USBoxMovie.getSimpleMovie().getTitle());
         holder.rank_box.setText("票房排名：" + USBoxMovie.getRank()+"  票房：" + USBoxMovie.getBox()/10000 + "万美元");
 

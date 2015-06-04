@@ -5,11 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dreamer.practice.R;
 import com.dreamer.practice.adapter.USBoxMovieListAdapter;
@@ -40,10 +40,14 @@ public class FilmUSBoxOfficeFragment extends Fragment {
             USBoxMovieListTask uSBoxMovieListTask = new USBoxMovieListTask(getActivity());
             uSBoxMovieListTask.setGetDateFinishedListener(new USBoxMovieListTask.GetDateFinishedListener() {
                 @Override
-                public void onGetDateFinished(Object data) {
-                    uSBoxMovieList = (ArrayList<USBoxMovie>) data;
-                    uSBoxMovieListAdapter.addUSBoxMovies(uSBoxMovieList);
-                    recyclerView.setAdapter(uSBoxMovieListAdapter);
+                public void onGetDateFinished(boolean success, Object data) {
+                    if (success) {
+                        uSBoxMovieList = (ArrayList<USBoxMovie>) data;
+                        uSBoxMovieListAdapter.addUSBoxMovies(uSBoxMovieList);
+                        recyclerView.setAdapter(uSBoxMovieListAdapter);
+                    }else{
+                        Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_SHORT).show();
+                    }
                     swipeRefreshLayout.setRefreshing(false);
                 }
             });
@@ -73,11 +77,14 @@ public class FilmUSBoxOfficeFragment extends Fragment {
                 USBoxMovieListTask uSBoxMovieListTask = new USBoxMovieListTask(getActivity());
                 uSBoxMovieListTask.setGetDateFinishedListener(new USBoxMovieListTask.GetDateFinishedListener() {
                     @Override
-                    public void onGetDateFinished(Object data) {
-                        uSBoxMovieList = (ArrayList<USBoxMovie>) data;
-                        Log.e("test", uSBoxMovieList.toString());
-                        uSBoxMovieListAdapter.clearUSBoxMovies();
-                        uSBoxMovieListAdapter.addUSBoxMovies(uSBoxMovieList);
+                    public void onGetDateFinished(boolean success, Object data) {
+                        if (success) {
+                            uSBoxMovieList = (ArrayList<USBoxMovie>) data;
+                            uSBoxMovieListAdapter.addUSBoxMovies(uSBoxMovieList);
+                            recyclerView.setAdapter(uSBoxMovieListAdapter);
+                        }else{
+                            Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_SHORT).show();
+                        }
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });

@@ -65,7 +65,7 @@ public class SimpleCelebrityListAdapter extends RecyclerView.Adapter<SimpleCeleb
     public void onBindViewHolder(SimpleCelebrityHolder viewHolder, final int i) {
         final SimpleCelebrity simpleCelebrity = simpleCelebrityList.get(i);
         //Picasso.with(context).setIndicatorsEnabled(false);
-        Picasso.with(context).load(simpleCelebrity.getAvatars().getLarge()).into(viewHolder.celebrity);
+        Picasso.with(context).load(simpleCelebrity.getAvatars().getLarge()).placeholder(R.drawable.load).error(R.drawable.load_error).into(viewHolder.celebrity);
         if (simpleCelebrity.getType()==1)
             viewHolder.celebrity.setTagText("导演");
         else if (simpleCelebrity.getType()==2)

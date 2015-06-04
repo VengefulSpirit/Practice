@@ -106,7 +106,7 @@ public class MovieDetailActivity extends BaseActivity {
             @Override
             public void onGetDateFinished(Object data) {
                 movie = (Movie)data;
-                Picasso.with(MovieDetailActivity.this).load(movie.getImages().getLarge()).into(iv_poster);
+                Picasso.with(MovieDetailActivity.this).load(movie.getImages().getLarge()).placeholder(R.drawable.load).error(R.drawable.load_error).into(iv_poster);
                 rb_rate.setRating(movie.getRating().getStars());
                 tv_rate.setText("评分："+movie.getRating().getAverage() + "分");
                 tv_time.setText(movie.getTitle() + " / " + movie.getYear() + "年");

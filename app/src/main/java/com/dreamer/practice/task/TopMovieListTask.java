@@ -2,7 +2,6 @@ package com.dreamer.practice.task;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.dreamer.practice.Application;
 import com.dreamer.practice.bean.TopMovieList;
@@ -25,6 +24,7 @@ public class TopMovieListTask extends AsyncTask<Void,Void,TopMovieList> {
     private Application application;
     private GetDateFinishedListener getDateFinishedListener;
     private TopMovieList topMovieList;
+    private boolean isSuccess = true;
 
     public TopMovieListTask(Context context) {
         this.context = context;
@@ -50,6 +50,8 @@ public class TopMovieListTask extends AsyncTask<Void,Void,TopMovieList> {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            isSuccess = false;
+            return null;
         }
         return topMovieList;
     }
@@ -59,10 +61,12 @@ public class TopMovieListTask extends AsyncTask<Void,Void,TopMovieList> {
         super.onPostExecute(topMovieList);
         if(topMovieList !=null){
             if (getDateFinishedListener!=null){
-                getDateFinishedListener.onGetDateFinished(topMovieList.getSubjects());
+                getDateFinishedListener.onGetDateFinished(isSuccess,topMovieList.getSubjects());
             }
         }else{
-            Toast.makeText(context,"网络异常",Toast.LENGTH_SHORT).show();
+            if (getDateFinishedListener!=null){
+                getDateFinishedListener.onGetDateFinished(isSuccess,null);
+            }
         }
     }
 
@@ -71,6 +75,6 @@ public class TopMovieListTask extends AsyncTask<Void,Void,TopMovieList> {
     }
 
     public static interface GetDateFinishedListener {
-        void onGetDateFinished(Object data);
+        void onGetDateFinished(boolean success, Object data);
     }
 }

@@ -9,6 +9,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dreamer.practice.R;
 import com.dreamer.practice.adapter.TopMovieListAdapter;
@@ -37,7 +38,7 @@ public class CityFragment extends Fragment {
 			TopMovieListTask topMovieListTask = new TopMovieListTask(getActivity());
 			topMovieListTask.setGetDateFinishedListener(new TopMovieListTask.GetDateFinishedListener() {
 				@Override
-				public void onGetDateFinished(Object data) {
+				public void onGetDateFinished(boolean success,Object data) {
 					movieList = (ArrayList<Movie>) data;
 					topMovieListAdapter.addMovies(movieList);
 					recyclerView.setAdapter(topMovieListAdapter);
@@ -68,10 +69,14 @@ public class CityFragment extends Fragment {
 				TopMovieListTask topMovieListTask = new TopMovieListTask(getActivity());
 				topMovieListTask.setGetDateFinishedListener(new TopMovieListTask.GetDateFinishedListener() {
 					@Override
-					public void onGetDateFinished(Object data) {
-						movieList = (ArrayList<Movie>) data;
-						topMovieListAdapter.addMovies(movieList);
-						recyclerView.setAdapter(topMovieListAdapter);
+					public void onGetDateFinished(boolean success, Object data) {
+						if (success) {
+							movieList = (ArrayList<Movie>) data;
+							topMovieListAdapter.addMovies(movieList);
+							recyclerView.setAdapter(topMovieListAdapter);
+						}else{
+							Toast.makeText(getActivity(),"网络异常",Toast.LENGTH_SHORT).show();
+						}
 						swipeRefreshLayout.setRefreshing(false);
 					}
 				});
