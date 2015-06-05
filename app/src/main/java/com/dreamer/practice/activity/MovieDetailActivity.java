@@ -89,12 +89,6 @@ public class MovieDetailActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MovieDetailActivity.this.onBackPressed();
-            }
-        });
 
         initView();
 
@@ -194,6 +188,10 @@ public class MovieDetailActivity extends BaseActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             showShare();
+            return true;
+        }
+        if (id == android.R.id.home) {
+            MovieDetailActivity.this.onBackPressed();
             return true;
         }
 
