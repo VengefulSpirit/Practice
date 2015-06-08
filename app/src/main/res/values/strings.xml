@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My DouBan</string>
+    <string name="app_name">shouxin practice</string>
 
     <string name="action_settings">Setting</string>
     <string name="dreamer">shouxin</string>
@@ -7,4 +7,5 @@
     
     <string name="movie_detail">Movie Detail</string>
     <string name="click">click</string>
+    <string name="load_more">Loading...</string>
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">新版豆瓣</string>
+    <string name="app_name">守心的Practice</string>
 
     <string name="action_settings">设置</string>
     <string name="dreamer">守心</string>
@@ -8,4 +8,5 @@
 
     <string name="click">点击了</string>
     <string name="movie_detail">电影详情</string>
+    <string name="load_more">数据加载中...</string>
 </resources>
