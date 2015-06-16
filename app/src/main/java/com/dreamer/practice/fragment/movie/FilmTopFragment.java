@@ -32,7 +32,6 @@ public class FilmTopFragment extends Fragment {
 	private List<Movie> movieList;
 
 	private View view;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (view==null) {

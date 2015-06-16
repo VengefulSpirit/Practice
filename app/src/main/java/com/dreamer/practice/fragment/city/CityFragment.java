@@ -23,10 +23,12 @@ import jp.wasabeef.recyclerview.animators.ScaleInLeftAnimator;
 
 public class CityFragment extends Fragment {
 
+	private final String TAG = "CityFragment";
 	private RecyclerView recyclerView;
 	private RecyclerView.LayoutManager layoutManager;
 	private SwipeRefreshLayout swipeRefreshLayout;
 	private TopMovieListAdapter topMovieListAdapter;
+
 	private List<Movie> movieList;
 
 	private View view;
@@ -39,9 +41,13 @@ public class CityFragment extends Fragment {
 			topMovieListTask.setGetDateFinishedListener(new TopMovieListTask.GetDateFinishedListener() {
 				@Override
 				public void onGetDateFinished(boolean success,Object data) {
-					movieList = (ArrayList<Movie>) data;
-					topMovieListAdapter.addMovies(movieList);
-					recyclerView.setAdapter(topMovieListAdapter);
+					if (success) {
+						movieList = (ArrayList<Movie>) data;
+						topMovieListAdapter.clearMovies();
+						topMovieListAdapter.addMovies(movieList);
+					}else{
+						Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_SHORT).show();
+					}
 					swipeRefreshLayout.setRefreshing(false);
 				}
 			});
@@ -61,19 +67,20 @@ public class CityFragment extends Fragment {
 		layoutManager = new LinearLayoutManager(getActivity());
 		recyclerView.setLayoutManager(layoutManager);
 		recyclerView.setItemAnimator(new ScaleInLeftAnimator());
+		recyclerView.setAdapter(topMovieListAdapter);
 		swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.accent));
 
 		swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
-				TopMovieListTask topMovieListTask = new TopMovieListTask(getActivity());
+				final TopMovieListTask topMovieListTask = new TopMovieListTask(getActivity());
 				topMovieListTask.setGetDateFinishedListener(new TopMovieListTask.GetDateFinishedListener() {
 					@Override
 					public void onGetDateFinished(boolean success, Object data) {
 						if (success) {
 							movieList = (ArrayList<Movie>) data;
+							topMovieListAdapter.clearMovies();
 							topMovieListAdapter.addMovies(movieList);
-							recyclerView.setAdapter(topMovieListAdapter);
 						}else{
 							Toast.makeText(getActivity(),"网络异常",Toast.LENGTH_SHORT).show();
 						}

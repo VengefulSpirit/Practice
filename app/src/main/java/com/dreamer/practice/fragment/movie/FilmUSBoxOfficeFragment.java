@@ -43,8 +43,8 @@ public class FilmUSBoxOfficeFragment extends Fragment {
                 public void onGetDateFinished(boolean success, Object data) {
                     if (success) {
                         uSBoxMovieList = (ArrayList<USBoxMovie>) data;
+                        uSBoxMovieListAdapter.clearUSBoxMovies();
                         uSBoxMovieListAdapter.addUSBoxMovies(uSBoxMovieList);
-                        recyclerView.setAdapter(uSBoxMovieListAdapter);
                     }else{
                         Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_SHORT).show();
                     }
@@ -80,8 +80,8 @@ public class FilmUSBoxOfficeFragment extends Fragment {
                     public void onGetDateFinished(boolean success, Object data) {
                         if (success) {
                             uSBoxMovieList = (ArrayList<USBoxMovie>) data;
+                            uSBoxMovieListAdapter.clearUSBoxMovies();
                             uSBoxMovieListAdapter.addUSBoxMovies(uSBoxMovieList);
-                            recyclerView.setAdapter(uSBoxMovieListAdapter);
                         }else{
                             Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_SHORT).show();
                         }
