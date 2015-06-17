@@ -206,15 +206,13 @@ public class MovieDetailActivity extends BaseActivity {
 
     private void showShare() {
         OnekeyShare oks = new OnekeyShare();
-        //关闭sso授权
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-        oks.setTitle(getString(R.string.share));
-        // text是分享文本，所有平台都需要这个字段
-        oks.setText("测试朋友圈");
-        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-        oks.setImagePath(movie.getImages().getSmall());//确保SDcard下面存在此张图片
+        oks.setTitle("电影："+movie.getTitle());
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl(movie.getWebsite());
+        oks.setUrl(movie.getAlt());
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        oks.setImagePath("/sdcard/test.png");//确保SDcard下面存在此张图片
+        //oks.setImagePath(movie.getImages().getSmall());
         // 启动分享GUI
         oks.show(this);
     }

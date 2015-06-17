@@ -18,7 +18,6 @@ import java.util.Arrays;
  * 
  * 3.主动去掉的字段
  * 		popular_reviews  影评，前10条，影评结构
- * 		alt  条目页URL
  * 		mobile_url  移动版条目页URL
  * 		do_count  在看人数，如果是电视剧，默认值为0，如果是电影值为null
  * 		douban_site  豆瓣小站
@@ -109,6 +108,10 @@ public class Movie {
 	 * 影评数
 	 */
 	private int reviews_count;
+	/**
+	 * 条目页URL
+	 */
+	private String alt;
 
 	public String getId() {
 		return id;
@@ -270,6 +273,13 @@ public class Movie {
 		this.reviews_count = reviews_count;
 	}
 
+	public String getAlt() {
+		return alt;
+	}
+
+	public void setAlt(String alt) {
+		this.alt = alt;
+	}
 	@Override
 	public String toString() {
 		return "Movie [id=" + id + ", title=" + title + ", original_title="
